@@ -10,7 +10,7 @@ CREATE TABLE MARCAS (
 CREATE TABLE COCHES (
     ID INT AUTO_INCREMENT PRIMARY KEY,
     ID_MARCA INT NOT NULL,
-    NOMBRE VARCHAR(50) NOT NULL,
+    NOMBRE_MODELO VARCHAR(50) NOT NULL,
     COLOR VARCHAR(30) NOT NULL
 );
 
@@ -23,13 +23,13 @@ CREATE TABLE PRECIOS (
 );
  
 INSERT INTO MARCAS (ID, NOMBRE_MARCA) VALUES
-  (1, 'Seat'),
-  (2, 'Peugeot'),
-  (3, 'Ford'),
-  (4, 'Porsche'),
-  (5, 'Nissan');
+    (1, 'Seat'),
+    (2, 'Peugeot'),
+    (3, 'Ford'),
+    (4, 'Porsche'),
+    (5, 'Nissan');
 
-INSERT INTO COCHES (ID, ID_MARCA, NOMBRE, COLOR) VALUES
+INSERT INTO COCHES (ID, ID_MARCA, NOMBRE_MODELO, COLOR) VALUES
     (1, 1, 'Leon TDI 1.5', 'Azul eléctrico'),
     (2, 1, 'Ibiza TSI 1.0', 'Rojo'),
     (3, 2, '3008', 'Blanco polar'),
