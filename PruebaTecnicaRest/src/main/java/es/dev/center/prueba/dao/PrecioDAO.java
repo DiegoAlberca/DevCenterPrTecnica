@@ -13,6 +13,6 @@ import es.dev.center.prueba.model.Precio;
 public interface PrecioDAO extends CrudRepository<Precio, Long> {
 	
 	@Query("SELECT p FROM Precio p WHERE p.coche.id = :idCoche AND p.fechaInicio < :fecha AND p.fechaFin > :fecha ")
-	public Precio findByCocheFecha(@Param("idCoche")Long coche, @Param("fecha") Date fecha);
+	public Iterable<Precio> findByCocheFecha(@Param("idCoche")Long coche, @Param("fecha") Date fecha);
 	
 }

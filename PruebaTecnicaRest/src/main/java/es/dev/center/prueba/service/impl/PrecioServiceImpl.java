@@ -27,8 +27,8 @@ public class PrecioServiceImpl implements PrecioService{
 	}
 
 	@Override
-	public Optional<Precio> findByCocheFecha(Long idCoche, Date fecha) {
-		return Optional.of(precioDAO.findByCocheFecha(idCoche, fecha));
+	public Iterable<Precio> findByCocheFecha(Long idCoche, Date fecha) {
+		return precioDAO.findByCocheFecha(idCoche, fecha);
 	}
 
 }

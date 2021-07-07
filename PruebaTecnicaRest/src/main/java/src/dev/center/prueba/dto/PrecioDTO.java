@@ -2,7 +2,9 @@ package src.dev.center.prueba.dto;
 
 import java.util.Date;
 
-public class CocheDTO {
+import es.dev.center.prueba.model.Precio;
+
+public class PrecioDTO {
 	
 	private Long idCoche;
 	private Long idMarca;
@@ -10,6 +12,22 @@ public class CocheDTO {
 	private Date fechaFin;
 	private Integer precio;
 	
+	public PrecioDTO(Precio precio) {
+		this.idCoche = precio.getCoche().getId();
+		this.idMarca = precio.getCoche().getMarca().getId();
+		this.fechaInicio = precio.getFechaInicio();
+		this.fechaFin = precio.getFechaFin();
+		this.precio = precio.getPrecio();
+	}
+	
+	public PrecioDTO(Long idCoche, Long idMarca, Date fechaInicio, Date fechaFin, Integer precio) {
+		this.idCoche = idCoche;
+		this.idMarca = idMarca;
+		this.fechaInicio = fechaInicio;
+		this.fechaFin = fechaFin;
+		this.precio = precio;
+	}
+
 	public Long getIdCoche() {
 		return idCoche;
 	}

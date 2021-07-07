@@ -11,5 +11,5 @@ public interface PrecioService {
 	
 	public Optional<Precio> findById(Long idPrecio);
 	
-	public Optional<Precio> findByCocheFecha(Long idCoche, Date fecha);
+	public Iterable<Precio> findByCocheFecha(Long idCoche, Date fecha);
 }
