@@ -1,15 +1,16 @@
 package es.dev.center.prueba.service.impl;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import es.dev.center.prueba.dao.PrecioDAO;
 import es.dev.center.prueba.model.Precio;
 import es.dev.center.prueba.service.PrecioService;
 
+@Service
 public class PrecioServiceImpl implements PrecioService{
 
 	@Autowired

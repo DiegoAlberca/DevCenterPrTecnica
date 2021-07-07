@@ -16,7 +16,7 @@ public class Marca {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "NOMBRE_MARCA", length = 50, nullable = false)
+	@Column(name = "NOMBRE_MARCA", length = 50)
 	private String nombreMarca;
 
 	public Long getId() {
