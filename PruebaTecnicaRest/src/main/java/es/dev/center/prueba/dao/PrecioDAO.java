@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import es.dev.center.prueba.model.Precio;
 
-public interface PrecioDAO extends CrudRepository<Precio, Long> {
+public interface PrecioDAO extends CrudRepository<Precio, Long>, PrecioDAOCustom {
 
 }
