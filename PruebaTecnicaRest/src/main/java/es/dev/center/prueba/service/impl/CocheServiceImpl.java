@@ -39,7 +39,7 @@ public class CocheServiceImpl implements CocheService{
 	}
 
 	@Override
-	public ByteArrayInputStream exportData() {
+	public ByteArrayInputStream exportData() throws IOException {
 		String [] columns = {"ID", "ID_MARCA", "NOMBRE_MODELO", "COLOR"};
 		
 		Workbook workbook = new HSSFWorkbook();
@@ -77,14 +77,39 @@ public class CocheServiceImpl implements CocheService{
 			initRow++;
 		}
 		
-		try {
-			workbook.write(stream);
-			workbook.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	
+		workbook.write(stream);
+		workbook.close();
+	
 		
 		return new ByteArrayInputStream(stream.toByteArray());
+	}
+
+	@Override
+	public List<Coche> findByColor(String color) {
+		return cocheDAO.findByColor(color);
+	}
+
+	@Override
+	public List<Coche> findByModelo(String modelo) {
+		return cocheDAO.findByModelo(modelo);
+
+	}
+
+	@Override
+	public List<Coche> findByMarca(String marca) {
+		return cocheDAO.findByMarca(marca);
+
+	}
+
+	@Override
+	public List<Coche> findByMasPrecio(Integer precio) {
+		return cocheDAO.findByMasPrecio(precio);
+	}
+
+	@Override
+	public List<Coche> findByMenosPrecio(Integer precio) {
+		return cocheDAO.findByMenosPrecio(precio);
 	}
 	
 }

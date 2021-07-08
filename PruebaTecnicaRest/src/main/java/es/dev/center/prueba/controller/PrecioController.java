@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.dev.center.prueba.dto.PrecioDTO;
+import es.dev.center.prueba.dto.Response;
 import es.dev.center.prueba.model.ApiCalls;
 import es.dev.center.prueba.model.ServiceEnum;
+import es.dev.center.prueba.service.ApiCallsService;
 import es.dev.center.prueba.service.PrecioService;
 
 @RestController
@@ -28,8 +30,11 @@ public class PrecioController {
 	@Autowired
 	private PrecioService precioService;
 	
+	@Autowired
+	private ApiCallsService apiCallsService;
+	
 	@GetMapping("/fecha")
-	public List<PrecioDTO> getPrecioByCocheFecha(
+	public Response getPrecioByCocheFecha(
 			HttpServletRequest request,
 			@RequestParam(value = "fecha") Date fecha, 
 			@RequestParam(value = "idCoche") Long idCoche) {
@@ -45,11 +50,16 @@ public class PrecioController {
 			logger.debug("ERROR [PrecioController.getPrecioByCocheFecha]");
 		}
 		
-		ApiCalls apiCalls = new ApiCalls();
-		apiCalls.setIp(request.getRemoteAddr());
-		apiCalls.setFecha(new Date());
-		apiCalls.setService(ServiceEnum.PRECIOS_FECHA);
+		ApiCalls apiCall = new ApiCalls();
+		apiCall.setIp(request.getRemoteAddr());
+		apiCall.setFecha(new Date());
+		apiCall.setService(ServiceEnum.PRECIOS_FECHA);
+		apiCallsService.saveApiCall(apiCall);
 		
-		return listaPrecios;
+		Response resp = new Response();
+		resp.setDatos(listaPrecios);
+		resp.setCodigoRespuesta(1);
+		resp.setTextoRespuesta("Peticion procesada correctamente");
+		return resp;
 	}
 }
