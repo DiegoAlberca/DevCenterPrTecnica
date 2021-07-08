@@ -13,6 +13,7 @@ import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -54,20 +55,21 @@ public class CocheController {
 		
 		if (filter != null) {
 			if (filter.startsWith(Constantes.MARCA_EQUALS)) {
-				String params = filter.substring(Constantes.MARCA_EQUALS.length()+1);
+				String params = StringUtils.trimWhitespace(filter.substring(Constantes.MARCA_EQUALS.length()));
+				
 				listaCoches = cocheService.findByMarca(params);
 				
 			} else if (filter.contains(Constantes.COLOR_EQUALS)) {
-				String params = filter.substring(filter.lastIndexOf(Constantes.COLOR_EQUALS));
+				String params = StringUtils.trimWhitespace(filter.substring(Constantes.COLOR_EQUALS.length()));
 				listaCoches = cocheService.findByColor(params);
 
 			} else if (filter.contains(Constantes.MODELO_EQUALS)) {
-				String params = filter.substring(filter.lastIndexOf(Constantes.MODELO_EQUALS));
+				String params = StringUtils.trimWhitespace(filter.substring(Constantes.MODELO_EQUALS.length()));
 				listaCoches = cocheService.findByModelo(params);
 				
 			} else if (filter.contains(Constantes.PRECIO_GREATER_THAN)) {
 				try {
-					String params = filter.substring(filter.lastIndexOf(Constantes.PRECIO_GREATER_THAN));		
+					String params = StringUtils.trimWhitespace(filter.substring(Constantes.PRECIO_GREATER_THAN.length()));		
 					listaCoches = cocheService.findByMenosPrecio(Integer.valueOf(params));
 				} catch (NumberFormatException e) {
 					Response resp = new Response();
@@ -78,7 +80,7 @@ public class CocheController {
 				
 			} else if (filter.contains(Constantes.PRECIO_LESS_THAN)) {
 				try {
-					String params = filter.substring(filter.lastIndexOf(Constantes.PRECIO_LESS_THAN));
+					String params = StringUtils.trimWhitespace(filter.substring(Constantes.PRECIO_LESS_THAN.length()));
 					listaCoches = cocheService.findByMasPrecio(Integer.valueOf(params));
 				} catch (NumberFormatException e) {
 					Response resp = new Response();
@@ -105,7 +107,7 @@ public class CocheController {
 		resp.setDatos(listaCoches);
 		resp.setTexto("Peticion procesada correctamente");
 		
-		return ResponseEntity.badRequest().body(resp);
+		return ResponseEntity.ok().body(resp);
 	}
 	
 	@GetMapping("/excel")

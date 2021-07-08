@@ -12,19 +12,19 @@ import es.dev.center.prueba.model.Coche;
 @Repository
 public interface CocheDAO extends CrudRepository<Coche, Long> {
 	
-	@Query("SELECT c FROM Coche c WHERE c.color = :color ")
+	@Query("SELECT c FROM Coche c WHERE LOWER(c.color) = LOWER(:color) ")
 	public List<Coche> findByColor(@Param("color")String color);
 	
-	@Query("SELECT c FROM Coche c WHERE c.nombreModelo = :modelo ")
+	@Query("SELECT c FROM Coche c WHERE LOWER(c.nombreModelo) = LOWER(:modelo) ")
 	public List<Coche> findByModelo(@Param("modelo")String modelo);
 	
-	@Query("SELECT c FROM Coche c WHERE c.marca.nombreMarca = :marca ")
+	@Query("SELECT c FROM Coche c WHERE LOWER(c.marca.nombreMarca) = LOWER(:marca) ")
 	public List<Coche> findByMarca(@Param("marca")String marca);
 	
 	@Query("SELECT c FROM Coche c INNER JOIN Precio p ON c.id=p.coche.id WHERE p.precio >= :precio ")
-	public List<Coche> findByMasPrecio(@Param("precio")Integer precio);
+	public List<Coche> findByMenosPrecio(@Param("precio")Integer precio);
 	
 	@Query("SELECT c FROM Coche c INNER JOIN Precio p ON c.id=p.coche.id WHERE p.precio <= :precio ")
-	public List<Coche> findByMenosPrecio(@Param("precio")Integer precio);
+	public List<Coche> findByMasPrecio(@Param("precio")Integer precio);
 
 }
