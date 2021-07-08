@@ -1,4 +1,4 @@
-package src.dev.center.prueba.dto;
+package es.dev.center.prueba.dto;
 
 import java.util.Date;
 

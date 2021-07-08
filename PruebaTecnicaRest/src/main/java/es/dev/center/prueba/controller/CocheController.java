@@ -3,7 +3,7 @@ package es.dev.center.prueba.controller;
 import java.io.ByteArrayInputStream;
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import es.dev.center.prueba.model.Coche;
 import es.dev.center.prueba.service.CocheService;
-import es.dev.center.prueba.service.PrecioService;
 
 @RestController
 @RequestMapping("coches")
@@ -30,7 +29,9 @@ public class CocheController {
 	private CocheService cocheService;
 
 	
-	public List<Coche> getCochesFilter(@RequestParam(value = "filter") String filter) {
+	public List<Coche> getCochesFilter(
+			HttpServletRequest request,
+			@RequestParam(value = "filter") String filter) {
 
 		
 		return null;
